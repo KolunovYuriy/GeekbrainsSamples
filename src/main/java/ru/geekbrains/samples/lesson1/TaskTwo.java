@@ -51,6 +51,7 @@ public class TaskTwo {
 
     }
 
+    //class Lorry extends Car, Moveable, Stopable{ //..." - не допускается мнжественное наследование
     class LightWeightCar extends Car implements Moveable{
 
         @Override
@@ -76,7 +77,7 @@ public class TaskTwo {
         }
 
         @Override
-        void open() {
+        void open() { // Лучше реализовать отдельный интерфейс с методом open() и наследовать его
 
         }
     }
