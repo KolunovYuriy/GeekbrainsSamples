@@ -1,5 +1,8 @@
 package ru.geekbrains.samples.lesson2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LessonTwo {
     public static void main(String[] args) {
         //-task1------------------//
@@ -32,6 +35,6 @@ public class LessonTwo {
         }
 
         //-task2------------------//
-
+        List<Cat> catList = new ArrayList<>();
     }
 }
