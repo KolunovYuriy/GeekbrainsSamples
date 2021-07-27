@@ -33,8 +33,18 @@ public class LessonTwo {
             Cat c = it2.next();
             System.out.println(c);
         }
-
+        System.out.println("-----------");
         //-task2------------------//
-        List<Cat> catList = new ArrayList<>();
+        MyArrayList<Cat> catList = new MyArrayList<>();
+        catList.add(new Cat(5, "Marsel"));
+        catList.add(new Cat(4, "Vasya"));
+        catList.add(new Cat(3, "Matroskin"));
+        catList.add(new Cat(2, "Q"));
+        MyArrayList.IteratorMyArrayList it3 = catList.iterator();
+        while(it3.hasNext()) {
+            Cat c = (Cat) it3.next();
+            System.out.println(c);
+        }
+
     }
 }

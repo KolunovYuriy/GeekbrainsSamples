@@ -7,7 +7,7 @@ public class MyArrayList<T> {
     private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
     private static final byte MULTIPLIER = 2;
 
-    private Object[] elementData;
+    private Object elementData[];
     private int size;
 
     public MyArrayList(Object[] array) {
@@ -32,8 +32,8 @@ public class MyArrayList<T> {
         return Arrays.stream(this.elementData).anyMatch(currentObject -> currentObject.equals(o));
     }
 
-    public Iterator iterator() {
-        return null;
+    public IteratorMyArrayList iterator() {
+        return new IteratorMyArrayList(this);
     }
 
     public Object[] toArray() {
@@ -42,13 +42,13 @@ public class MyArrayList<T> {
 
     public boolean add(T t) {
         if (this.elementData.equals(DEFAULTCAPACITY_EMPTY_ELEMENTDATA)) {
-            this.elementData = new Object[DEFAULT_CAPACITY];
-            size = 0;
+            resize(DEFAULT_CAPACITY);
+            this.size = 0;
         }
-        if (size==this.elementData.length) {
+        if (this.size==this.elementData.length) {
             resize();
         }
-        elementData[++size] = t;
+        elementData[++this.size] = t;
         return false;
     }
 
@@ -76,15 +76,26 @@ public class MyArrayList<T> {
     }
 
     public Object get(int index) {
-        return null;
+        if ((this.elementData.equals(DEFAULTCAPACITY_EMPTY_ELEMENTDATA)) || (index>=(size-1))) {return null;}
+        return this.elementData[index];
     }
 
     public Object set(int index, Object element) {
-        return null;
+        Object result = null;
+        if ((this.elementData.equals(DEFAULTCAPACITY_EMPTY_ELEMENTDATA)) || (index>=(size-1))) {resize(index+1);}
+        result = this.elementData[index];
+        this.elementData[index] = element;
+        return result;
     }
 
     public void add(int index, Object element) {
-
+        if ((this.elementData.equals(DEFAULTCAPACITY_EMPTY_ELEMENTDATA)) || (index>=(size-1))) {resize(index+2);}
+        Object buffer = this.elementData[index];
+        for (int i = index; i < this.elementData.length -1; i++) {
+            this.elementData[i+1] = this.elementData[i];
+        }
+        this.elementData[index] = element;
+        this.size++;
     }
 
     public Object remove(int index) {
@@ -95,16 +106,28 @@ public class MyArrayList<T> {
             this.elementData[i] = this.elementData[i + 1];
         }
         this.elementData = Arrays.copyOf(this.elementData, this.elementData.length - 1);
-        size--;
+        this.size--;
         return result;
     }
 
     public int indexOf(Object o) {
-        return 0;
+        int result=-1;
+        if (this.elementData.equals(DEFAULTCAPACITY_EMPTY_ELEMENTDATA)) return -1;
+        for (int i = 0; i < this.size; i++) {
+            if (this.elementData[i].equals(o)) {
+                result = i;
+                break;
+            }
+        }
+        return result;
     }
 
     private void resize() {
-        Arrays.copyOf(this.elementData,this.elementData.length*MULTIPLIER);
+        this.elementData = Arrays.copyOf(this.elementData,this.elementData.length*MULTIPLIER);
+    }
+
+    private void resize(int size) {
+        this.elementData = Arrays.copyOf(this.elementData,size);
     }
 
     protected class IteratorMyArrayList implements Iterator {
@@ -119,13 +142,12 @@ public class MyArrayList<T> {
 
         @Override
         public boolean hasNext() {
-            return currentIndex != (myArrayList.size()-1);
+            return currentIndex <= (myArrayList.size()-1);
         }
 
         @Override
         public Object next() {
             if (!hasNext()) return null;
-            ++currentIndex;
             return myArrayList.get(++currentIndex);
         }
 
