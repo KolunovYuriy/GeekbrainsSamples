@@ -1,0 +1,9 @@
+1. Создать builder для класса Person со следующими полями: String firstName, String lastName, String middleName, String country, String address, String phone, int age, String gender.
+2. Описать ошибки в коде (см. задание в методичке) и предложить варианты оптимизации.
+
+ "...class Lorry extends Car, Moveable, Stopable{..." - не допускается мнжественное наследование
+ Правильней будет так: "...class Lorry extends Car implements Moveable, Stopable{..."
+ у класса Car есть есть абстрактный метод run(). Его необходимо будет реализовать
+
+
+3. Написать пример кода, который реализует принцип полиморфизма, на примере фигур — круг, квадрат, треугольник
