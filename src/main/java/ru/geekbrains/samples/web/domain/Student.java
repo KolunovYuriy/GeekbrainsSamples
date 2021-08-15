@@ -1,9 +1,6 @@
 package ru.geekbrains.samples.web.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
+@Builder
 @Table(name = "students")
 public class Student {
     @Id
@@ -25,12 +23,16 @@ public class Student {
     @Column(name = "mark")
     private int mark;
 
+    @Column(name = "age")
+    private int age;
+
     @Override
     public String toString() {
         return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", mark=" + mark +
+                ", age=" + age +
                 '}';
     }
 }

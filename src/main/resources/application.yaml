@@ -1,3 +1,7 @@
+server:
+  port: 8195
+  servlet:
+    context-path: /
 spring:
   flyway:
     enabled: true

@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 @Component
 public class Test implements CommandLineRunner {
 
-    final private boolean IS_RUN = true;
+    final private boolean IS_RUN = false
 
     @PersistenceContext
     EntityManager entityManager;
@@ -30,7 +30,7 @@ public class Test implements CommandLineRunner {
             System.out.println("startTest");
             StudentCustomRepository repository = new StudentCustomRepository(entityManager, Student.class);
             for (int i=1;i<=1000;i++)
-                repository.save(new Student(i, "Student " + i, (int) (6 * Math.random())));
+                repository.save(Student.builder().name("Student " + i).mark((int) (6 * Math.random())).age((int) (100 * Math.random())).build());
             long removeId = (long)(500 * Math.random());
             // test findById and remove
             repository.remove(repository.findById(removeId));
