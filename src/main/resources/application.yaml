@@ -1,0 +1,15 @@
+spring:
+  flyway:
+    enabled: true
+    locations: classpath:/db/migration
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5435/university?currentSchema=public
+    username: postgres
+    password: password
+  jpa:
+    database: POSTGRESQL
+    # show-sql: true
+    generate-ddl: true
+    # hibernate:
+      # ddl-auto: create-drop
